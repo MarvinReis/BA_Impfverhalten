@@ -127,11 +127,11 @@ esttab fullmodel_* using /*"Modelle_Analyse.rtf"*/, p eform compress replace
 **GISD over sampreg
 melogit Impfstatus_2 i.Geschlecht ib4.Altersgruppe_RKI i.Vorerkrankung ib2.Infekt c.HHinc c.GISD_ROR_Score##i.casmin_einfach c.GISD_ROR_Score##i.sampreg if e(sample), or vce(robust) || ror:		  
 	
-margins sampreg, at(GISD_ROR_Score=(0(0.1)1)) atmeans
+margins sampreg, at(GISD_ROR_Score=(0(0.1)1))
 marginsplot, recast(line) recastci(rarea) ciopt(color(%15)) scheme(rkihc) title("") ytitle("P(Impfung)") xtitle("GISD-Score") plot(, label("Westdeutschland" "Ostdeutschland"))
 graph export /*"Marginsplot_GISD_OW.png"*/,  as(png) replace
 
-margins, at(GISD_ROR_Score=(0(0.1)1)) dydx(sampreg) atmeans
+margins, at(GISD_ROR_Score=(0(0.1)1)) dydx(sampreg)
 marginsplot, recast(line) recastci(rarea) ciopt(color(%15)) scheme(rkihc) yline(0) title("") ytitle("Differenz P(Impfung) zu Westdeutschland") xtitle("GISD-Score")
 graph export /*"MarginalEffects_GISD_OW.png"*/,  as(png) replace
 
@@ -140,11 +140,11 @@ graph export /*"MarginalEffects_GISD_OW.png"*/,  as(png) replace
 **Bildung + GISD
 melogit Impfstatus_2 i.Geschlecht ib4.Altersgruppe_RKI i.Vorerkrankung ib2.Infekt c.HHinc c.GISD_ROR_Score##i.casmin_einfach c.GISD_ROR_Score##i.sampreg if e(sample), or vce(robust) || ror:	
 
-margins casmin_einfach, at(GISD_ROR_Score=(0(0.1)1)) atmeans
+margins casmin_einfach, at(GISD_ROR_Score=(0(0.1)1))
 marginsplot, recast(line) recastci(rarea) ciopt(color(%5)) scheme(rkihc) title("") ytitle("P(Impfung)") xtitle("GISD-Score") plot(, label("Niedrige Bildung ""Mittlere Bildung" "Hohe Bildung"))
 graph export /*"Marginsplot_GISD_Bildung.png"*/,  as(png) replace
 
-margins, at(GISD_ROR_Score=(0(0.1)1)) dydx(casmin_einfach) atmeans
+margins, at(GISD_ROR_Score=(0(0.1)1)) dydx(casmin_einfach)
 marginsplot, recast(line) recastci(rarea) ciopt(color(%10)) scheme(rkihc) yline(0) title("") ytitle("Differenz P(Impfung) zu Niedriger Bildung") xtitle("GISD-Score") plot(, label("Mittlere Bildung" "Hohe Bildung"))
 graph export /*"MarginalEffects_GISD_Bildung.png"*/,  as(png) replace
 
@@ -276,17 +276,17 @@ est store RS_ohne
 mixed Impfstatus_2 i.Geschlecht ib4.Altersgruppe_RKI i.Vorerkrankung i.Infekt c.HHinc i.casmin_einfach c.GISD_ROR_Score##i.sampreg if e(sample), vce(robust)|| ror:
 est store linprob_1
 
-margins, at(GISD_ROR_Score=(0(0.1)1)) over(sampreg) atmeans
+margins, at(GISD_ROR_Score=(0(0.1)1)) over(sampreg)
 marginsplot, recast(line) recastci(rarea) ciopt(color(%20)) yline(0)
 
 
 mixed Impfstatus_2 i.Geschlecht ib4.Altersgruppe_RKI i.Vorerkrankung i.Infekt c.HHinc c.GISD_ROR_Score##i.casmin_einfach c.GISD_ROR_Score##i.sampreg if e(sample), vce(robust)|| ror:
 est store linprob_2
 
-margins casmin_einfach, at(GISD_ROR_Score=(0(0.1)1)) atmeans
+margins casmin_einfach, at(GISD_ROR_Score=(0(0.1)1))
 marginsplot, recast(line) recastci(rarea) ciopt(color(%15)) yline(0) scheme(rkihc)
 
-margins, at(GISD_ROR_Score=(0(0.1)1)) dydx(casmin_einfach) atmeans
+margins, at(GISD_ROR_Score=(0(0.1)1)) dydx(casmin_einfach)
 marginsplot, recast(line) recastci(rarea) ciopt(color(%15)) yline(0) scheme(rkihc)
 
 
